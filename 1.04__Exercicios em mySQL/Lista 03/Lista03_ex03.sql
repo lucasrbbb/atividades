@@ -1,0 +1,65 @@
+-- create schema
+
+CREATE DATABASE REVENDEDORA_CARROS;
+
+USE REVENDEDORA_CARROS;
+
+CREATE TABLE automovel(
+renavam VARCHAR(7) NOT NULL UNIQUE PRIMARY KEY, 
+placa VARCHAR(7) NOT NULL UNIQUE,
+marca VARCHAR(40) NOT NULL,
+modelo VARCHAR(40) NOT NULL,
+ano_fabricacao YEAR NOT NULL,
+ano_modelo YEAR NOT NULL,
+cor VARCHAR(40) NOT NULL,
+motor VARCHAR(40),
+n_portas INT NOT NULL,
+tipo_combustivel VARCHAR(40) NOT NULL, 
+preco FLOAT
+);
+
+CREATE TABLE cliente(
+id_cliente INT NOT NULL UNIQUE PRIMARY KEY AUTO_INCREMENT, 
+nome VARCHAR(40) NOT NULL,
+sobrenome VARCHAR(40) NOT NULL,
+telefone VARCHAR(12),
+rua VARCHAR(40),
+numero_end INT,
+complemento VARCHAR(40),
+bairro VARCHAR(40),
+cidade VARCHAR(40),
+estado VARCHAR(40),
+cep VARCHAR(8)
+);
+
+CREATE TABLE vendedor(
+id_vendedor INT NOT NULL UNIQUE PRIMARY KEY AUTO_INCREMENT, 
+nome VARCHAR(40) NOT NULL,
+sobrenome VARCHAR(40) NOT NULL,
+telefone VARCHAR(12) NOT NULL,
+rua VARCHAR(40) NOT NULL,
+numero_end INT NOT NULL,
+complemento VARCHAR(40),
+bairro VARCHAR(40) NOT NULL,
+cidade VARCHAR(40) NOT NULL,
+estado VARCHAR(40) NOT NULL,
+cep VARCHAR(8) NOT NULL,
+data_admissao DATE NOT NULL
+);
+
+CREATE TABLE VENDAS(
+id_venda INT NOT NULL UNIQUE PRIMARY KEY AUTO_INCREMENT,
+data_venda DATE NOT NULL, 
+preco_venda FLOAT NOT NULL,
+id_cliente INT NOT NULL UNIQUE,
+id_vendedor INT NOT NULL UNIQUE,
+renavam VARCHAR(7) NOT NULL,
+FOREIGN KEY (id_cliente) REFERENCES cliente (id_cliente),
+FOREIGN KEY (id_vendedor) REFERENCES vendedor (id_vendedor),
+FOREIGN KEY (renavam) REFERENCES automovel (renavam)
+);
+
+
+
+
+
